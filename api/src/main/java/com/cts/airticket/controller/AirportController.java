@@ -1,5 +1,6 @@
 package com.cts.airticket.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,15 @@ public class AirportController {
 
 	@Autowired
 	AirportRepository service;
+	
+	@RequestMapping("/findAll")
+	List<AirportVo> findAllAirports() {
+		List<AirportEntity> airportEntities = new ArrayList<AirportEntity>();
+		service.findAll().forEach(airportEntities::add);
+		return airportEntities.stream().map(ApiUtil::converFromEntityToVo)
+				.collect(Collectors.toList());
+	}
+	
 
 	@RequestMapping("/findByCode/{airportCode}")
 	List<AirportVo> findByAirportCodeContaining(@PathVariable String airportCode) {
