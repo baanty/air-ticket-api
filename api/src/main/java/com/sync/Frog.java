@@ -1,8 +1,8 @@
 package com.sync;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 public class Frog {
 
@@ -12,6 +12,23 @@ public class Frog {
 		System.out.println(c.solution(new int[] {1, 5, 5, 2, 6}));
 		System.out.println(c.solution(new int[] {1, 1}));
 		System.out.println(c.solution(new int[] {5, 7, 8, 8, 8, 5, 7, 10}));
+		System.out.println(c.solution(new int[] {1, 0}));
+		
+		
+		
+		int arrayLength = 9999999;
+		int[] loadedArray = new int[arrayLength]; 
+	
+		for ( int index = 0 ; index < arrayLength ; index ++ ) {
+			
+			Random randomInt = new Random();
+			loadedArray[index] = randomInt.nextInt();
+		}
+		LocalDateTime ldtStart = LocalDateTime.now();
+		System.out.println(c.solution(loadedArray));
+		//Thread.sleep(2000);
+		LocalDateTime ldtEnd = LocalDateTime.now();
+		System.out.println("Execution Time in seconds - " + ldtStart.until(ldtEnd, ChronoUnit.MILLIS));
 	}
 	
 	
