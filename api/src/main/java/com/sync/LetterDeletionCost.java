@@ -17,23 +17,26 @@ public class LetterDeletionCost {
 	}
 
 	public int solution(String S, int[] C) {
-
 		if (S == null || S.length() == 1 || S.length() == 0) {
 			return 0;
 		}
-		int accumulatedMinCost = 0;
-
+		List<Integer> minimumCosts = new ArrayList<Integer>();
 		for (int index = 0; index < S.length() - 1; index++) {
 			char ch = S.charAt(index);
-
 			if (S.charAt(index + 1) == ch) {
-				int firstCharacterRemovalCost = C[index];
-				int secondCharacterRemovalCost = C[index + 1];
-				accumulatedMinCost = accumulatedMinCost + (firstCharacterRemovalCost > secondCharacterRemovalCost ? secondCharacterRemovalCost
-						: firstCharacterRemovalCost);
+				List<Integer> positionsOfChar = new ArrayList<Integer>();
+				for (int innerIndex = index; innerIndex < S.length(); innerIndex++) {
+					if (S.charAt(innerIndex) == ch) {
+						positionsOfChar.add(innerIndex);
+					}
+				}
+				if (positionsOfChar.size() > 0) {
+					minimumCosts.add(positionsOfChar.stream().map(charPos -> C[charPos]).sorted()
+							.collect(Collectors.toList()).get(0));
+				}
 			}
 		}
-		return accumulatedMinCost;
+		return minimumCosts.stream().collect(Collectors.summingInt(Integer::intValue));
 	}
 
 }
