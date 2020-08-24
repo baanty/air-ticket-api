@@ -14,7 +14,7 @@ public class LetterDeletionCost {
 		System.out.println(c.solution("ababa", new int[] { 10, 5, 10, 5, 10 }));
 		System.out.println(c.solution("zzwzz", new int[] { 5, 4, 3, 2, 1 }));
 		
-		int arrayLength = 10000000;
+		int arrayLength = 9999999;
 		int[] loadedArray = new int[arrayLength]; 
 		StringBuilder inputString = new StringBuilder();
 		
@@ -23,14 +23,16 @@ public class LetterDeletionCost {
 			Random randomInt = new Random();
 			char ch = (char)(randomInt.nextInt(26) + 'a');
 			inputString.append(ch);
-			loadedArray[index] = randomInt.nextInt();
+			int element = randomInt.nextInt();
+			element = element > 0 ? element : ( element * -1 );
+			loadedArray[index] = element;
 		}
 		String inputStr = inputString.toString();
 		LocalDateTime ldtStart = LocalDateTime.now();
 		System.out.println(c.solution(inputStr, loadedArray));
 		//Thread.sleep(2000);
 		LocalDateTime ldtEnd = LocalDateTime.now();
-		System.out.println("Execution Time in seconds - " + ldtStart.until(ldtEnd, ChronoUnit.SECONDS));
+		System.out.println("Execution Time in seconds - " + ldtStart.until(ldtEnd, ChronoUnit.MILLIS));
 	}
 
 	public int solution(String inputString, int[] charRemovalCosts) {

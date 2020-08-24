@@ -22,7 +22,9 @@ public class Frog {
 		for ( int index = 0 ; index < arrayLength ; index ++ ) {
 			
 			Random randomInt = new Random();
-			loadedArray[index] = randomInt.nextInt();
+			int element = randomInt.nextInt();
+			element = element > 0 ? element : ( element * -1 );
+			loadedArray[index] = element;
 		}
 		LocalDateTime ldtStart = LocalDateTime.now();
 		System.out.println(c.solution(loadedArray));
