@@ -1,10 +1,5 @@
 package com.sync;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class LetterDeletionCost {
 
 	public static void main(String[] x) {
@@ -23,10 +18,9 @@ public class LetterDeletionCost {
 		}
 		int accumulatedMinCost = 0;
 
-		for (int index = 0; index < S.length() - 1; index++) {
-			char ch = S.charAt(index);
+		for ( int index = 0; index < S.length() - 1; index++ ) {
 
-			if (S.charAt(index + 1) == ch) {
+			if ( S.charAt(index) == S.charAt(index + 1) ) {
 				int firstCharacterRemovalCost = C[index];
 				int secondCharacterRemovalCost = C[index + 1];
 				accumulatedMinCost = accumulatedMinCost + (firstCharacterRemovalCost > secondCharacterRemovalCost ? secondCharacterRemovalCost
