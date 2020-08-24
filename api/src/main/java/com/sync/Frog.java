@@ -11,32 +11,36 @@ public class Frog {
 		System.out.println(c.solution(new int[] {2, 6, 8, 5}));
 		System.out.println(c.solution(new int[] {1, 5, 5, 2, 6}));
 		System.out.println(c.solution(new int[] {1, 1}));
+		System.out.println(c.solution(new int[] {5, 7, 8, 8, 8, 5, 7, 10}));
 	}
 	
 	
 	public int solution(int[] blocks) {
-		List<Integer> options = new ArrayList<Integer>();
+		int longestDistance = 0;
 		
-		for ( int i = 0 ;  i < blocks.length ; i ++) {
+		for ( int index = 0 ;  index < blocks.length ; index ++) {
 			int distance = 1;
 			
-			for ( int leftProgressionIndex = i ; leftProgressionIndex > 0 ; leftProgressionIndex-- ) {
+			for ( int leftProgressionIndex = index ; leftProgressionIndex > 0 ; leftProgressionIndex-- ) {
 				
 				if ( blocks[leftProgressionIndex - 1] >= blocks[leftProgressionIndex] ) {
 					distance++;
+				} else {
+					break;
 				}
 			}
 
-			for ( int rightProgressionIndex = i ; rightProgressionIndex < blocks.length - 1 ; rightProgressionIndex++ ) {
+			for ( int rightProgressionIndex = index ; rightProgressionIndex < blocks.length - 1 ; rightProgressionIndex++ ) {
 				
 				if ( blocks[rightProgressionIndex + 1] >= blocks[rightProgressionIndex] ) {
 					distance++;
+				} else {
+					break;
 				}
 			}
-			options.add(distance);
+			longestDistance = longestDistance > distance ? longestDistance : distance;
 		}
-		Collections.sort(options, Collections.reverseOrder());
-		return options.get(0);
+		return longestDistance;
 	}
 	
 }
